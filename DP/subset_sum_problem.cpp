@@ -35,11 +35,10 @@ dp[i][sum] = dp[i-1][sum]; // completely skip because the sum < arr[i].
 // Code Approach 1 : 
 // A recursive solution for subset sum problem
 
-#include <bits/stdc++.h>
-using namespace std;
+// Time Complexity: O(2n) The above solution may try all subsets of the given set in worst case. Therefore time complexity of the above solution is exponential. The problem is in-fact NP-Complete (There is no known polynomial time solution for this problem).
+// Auxiliary Space: O(n) where n is recursion stack space.
 
-// Returns true if there is a subset
-// of set[] with sum equal to given sum
+
 bool isSubsetSum(int set[], int n, int sum)
 {
 	// Base Cases
@@ -50,7 +49,7 @@ bool isSubsetSum(int set[], int n, int sum)
 
 	// If last element is greater than sum,
 	// then ignore it
-	if (set[n - 1] > sum)
+	if (set[n - 1] > sum) // as basic approach we have to start the question while checking the last element.
 		return isSubsetSum(set, n - 1, sum);
 
 	// Else, check if sum can be obtained by any
@@ -61,22 +60,10 @@ bool isSubsetSum(int set[], int n, int sum)
 		|| isSubsetSum(set, n - 1, sum - set[n - 1]);
 }
 
-// Driver code
-int main()
-{
-	int set[] = { 3, 34, 4, 12, 5, 2 };
-	int sum = 9;
-	int n = sizeof(set) / sizeof(set[0]);
-	if (isSubsetSum(set, n, sum) == true)
-		cout << "Found a subset with given sum";
-	else
-		cout << "No subset with given sum";
-	return 0;
-}
 
 // =====================================>>> <<<===============================================
-/*
-// Dyanmic Programming (Top Down Approach .. )
+// Apporoach 2 : 
+// Dyanmic Programming (Recurssion + Memoization )
 
 bool subsetSum(int a[], int n, int sum)
 {
@@ -101,4 +88,44 @@ bool subsetSum(int a[], int n, int sum)
 	}
 }
 
-*/
+// ===================================>>> <<<============================================
+// Approach 3 : Top-Down approach 
+
+// Time Complexity: O(sum * n), where n is the size of array.
+// Auxiliary Space: O(sum*n), as the size of 2-D array is sum*n.
+
+
+// Returns true if there is a subset of set[] (array)
+// with sum equal to given sum
+bool isSubsetSum(int set[], int n, int sum)
+{
+    // The value of subset[i][j] will be true if
+    // there is a subset of set[0..j-1] with sum
+    // equal to i
+    bool subset[n + 1][sum + 1]; // matrix formation 
+ 
+    // If sum is 0, then answer is true
+    for (int i = 0; i <= n; i++)
+        subset[i][0] = true; // We can always form the empty {} matrix for that 
+ 
+    // If sum is not 0 and set is empty,
+    // then answer is false
+    for (int i = 1; i <= sum; i++) // If array is [] empty ==> then we never form the matrix corresponding to the sum=0;
+        subset[0][i] = false;
+ 
+    // Fill the subset table in bottom up manner
+    for (int i = 1; i <= n; i++) { // row
+        for (int j = 1; j <= sum; j++) { // column
+            if (j < set[i - 1])
+                subset[i][j] = subset[i - 1][j];
+            if (j >= set[i - 1])
+                subset[i][j]
+                    = subset[i - 1][j]
+                      || subset[i - 1][j - set[i - 1]];
+        }
+    }
+ 
+    return subset[n][sum];
+}
+ 
+// Watch the Aditya verma sir's lecture for the better understanding :
