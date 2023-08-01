@@ -1,4 +1,5 @@
 /*
+
 Problem Statement : We are given with an array and Sum ?  " arr = [2,3,7,8,10] and Sum = 11 ". 
 We have to give an output a true/false .. If the sum is present as a subset sum of not . 
 
@@ -29,7 +30,7 @@ if(arr[i] <= sum ){
 }
 else
 dp[i][sum] = dp[i-1][sum]; // completely skip because the sum < arr[i].
- 
+  
 */
 
 // Code Approach 1 : 
@@ -59,7 +60,6 @@ bool isSubsetSum(int set[], int n, int sum)
 	return isSubsetSum(set, n - 1, sum)
 		|| isSubsetSum(set, n - 1, sum - set[n - 1]);
 }
-
 
 // =====================================>>> <<<===============================================
 // Apporoach 2 : 
