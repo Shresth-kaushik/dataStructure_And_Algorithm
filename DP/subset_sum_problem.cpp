@@ -1,7 +1,7 @@
 /*
 
 Problem Statement : We are given with an array and Sum ?  " arr = [2,3,7,8,10] and Sum = 11 ". 
-We have to give an output a true/false .. If the sum is present as a subset sum of not . 
+We have to give an output a true/false .. If the sum is present as a subset sum or not . 
 
 Approach and code is Similar to the 0/1 Knapsack Problem : 
 
@@ -36,10 +36,12 @@ dp[i][sum] = dp[i-1][sum]; // completely skip because the sum < arr[i].
 // Code Approach 1 : 
 // A recursive solution for subset sum problem
 
-// Time Complexity: O(2n) The above solution may try all subsets of the given set in worst case. Therefore time complexity of the above solution is exponential. The problem is in-fact NP-Complete (There is no known polynomial time solution for this problem).
+// Time Complexity: O(2^n) The above solution may try all subsets of the given set in worst case.
+//  Therefore time complexity of the above solution is exponential. 
+//  The problem is in-fact NP-Complete (There is no known polynomial time solution for this problem).
 // Auxiliary Space: O(n) where n is recursion stack space.
 
-
+// Recurssion 
 bool isSubsetSum(int set[], int n, int sum)
 {
 	// Base Cases
@@ -60,6 +62,8 @@ bool isSubsetSum(int set[], int n, int sum)
 	return isSubsetSum(set, n - 1, sum)
 		|| isSubsetSum(set, n - 1, sum - set[n - 1]);
 }
+
+
 
 // =====================================>>> <<<===============================================
 // Apporoach 2 : 
@@ -129,3 +133,4 @@ bool isSubsetSum(int set[], int n, int sum)
 }
  
 // Watch the Aditya verma sir's lecture for the better understanding :
+// Dynamic playlist 
