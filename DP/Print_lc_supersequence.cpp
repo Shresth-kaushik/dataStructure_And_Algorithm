@@ -52,6 +52,7 @@ string lcs(string str1, string str2, int m , int n) {
             s.push_back(str2[j-1]);
             j--;
         } 
+        // Reverse the string to get the original string 
         reverse(s.begin(), s.end());
         return s;
 
