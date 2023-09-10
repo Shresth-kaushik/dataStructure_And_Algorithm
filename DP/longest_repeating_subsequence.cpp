@@ -36,7 +36,7 @@ int sizeOfLargestRepeatingSubSeq(string a, string b, int m, int n){
     }
     for(int i = 1; i <= m; i++){
         for(int j = 1; j <= n; j++){
-            if(a[i-1] == b[j-1] && i != j){
+            if(a[i-1] == b[j-1] && i != j){ // only change is that we have add one more condition (i!=j) => is allowed 
                 dp[i][j] = 1+dp[i-1][j-1];
             }
             else{
