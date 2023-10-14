@@ -1,3 +1,6 @@
+// Time complexity : O(n^2) average case 
+// T.C = O(n) -> Best case when the array is sorted .
+
 #include<iostream>
 using namespace std;
 
